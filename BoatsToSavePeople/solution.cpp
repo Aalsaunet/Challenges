@@ -47,6 +47,23 @@ public:
 
         return requiredBoats;
     }
+
+    int numRescueBoatsOptimized(vector<int>& people, int limit) {
+       
+        sort(people.begin(), people.end());
+
+        int i = 0, j = people.size() - 1, boatsRequired = 0;        
+        while (i <= j) {   
+            if (people[i] + people[j] <= limit) {
+                i++;
+                j--;
+            }
+            else
+                j--;        
+            boatsRequired++; 
+        }
+        return boatsRequired;  
+    }
 };
 
 int main() {
@@ -58,7 +75,7 @@ int main() {
     people.push_back(1);
     int limit = 3;
     
-    int result = solution.numRescueBoats(people, limit);
+    int result = solution.numRescueBoatsOptimized(people, limit);
     std::cout << "Number of required boats: " << result << endl;
 
     return 0;
