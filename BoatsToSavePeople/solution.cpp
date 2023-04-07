@@ -14,12 +14,12 @@ public:
         int remainingPeople = people.size();
         int requiredBoats = 0;
 
-        for (auto p : people) {
-            if (peopleByWeight.count(p)) {
+        for (int i = 0; i < people.size(); i++) {
+            if (peopleByWeight.count(people[i])) {
                 // Key exists 
-                peopleByWeight[p]++;
+                peopleByWeight[people[i]]++;
             } else {
-                peopleByWeight[p] = 1; // alternatively peopleByWeight.insert(std::make_pair(p, 1));
+                peopleByWeight[people[i]] = 1; // alternatively peopleByWeight.insert(std::make_pair(p, 1));
             }
         }
 
@@ -51,8 +51,8 @@ public:
     int numRescueBoatsOptimized(vector<int>& people, int limit) {
        
         sort(people.begin(), people.end());
-
-        int i = 0, j = people.size() - 1, boatsRequired = 0;        
+        int i = 0, j = people.size() - 1, boatsRequired = 0;  
+              
         while (i <= j) {   
             if (people[i] + people[j] <= limit) {
                 i++;
