@@ -10,7 +10,8 @@ class Solution
 {
 public:
     bool canJumpGraph(vector<int> &nums) {
-        // contruct and adjecancy list (nodes and edges in a graph)
+        
+        // Construct an adjecancy list (nodes and edges in a graph)
         map<int, vector<int>> nodes;
         for (int i = 0; i < nums.size(); i++) {
             vector<int> edges;
@@ -27,14 +28,12 @@ public:
         queue.push(origin);
         set<int> visited;
 
-        while (queue.size() > 0)
-        {
+        while (queue.size() > 0) {
             int current = queue.front();
             queue.pop();
 
             if (visited.count(current))
                 continue;
-
             visited.insert(current);
 
             if (current == destination)
@@ -48,8 +47,9 @@ public:
         return false;
     }
 
-    bool canJump(vector<int> &nums)
-    {
+    // Alternative implementation (more efficient than the graph search)
+
+    bool canJump(vector<int> &nums) {
         int maxReachable = 0;
 
         for (int i = 0; i < nums.size(); i++) {
@@ -74,7 +74,6 @@ public:
 
 int main() {
     Solution st;
-
     vector<int> nums1 = {2, 3, 1, 1, 4};
     std::cout << st.canJump(nums1) << std::endl;
 }
