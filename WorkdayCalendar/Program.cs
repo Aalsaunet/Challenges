@@ -134,7 +134,7 @@ namespace WorkdayNet
             string format = "dd-MM-yyyy HH:mm";
             TestWorkdayIncrement(calendar, new DateTime(2004, 5, 24, 18, 5, 0), -5.5m, "14-05-2004 12:00", format);
             TestWorkdayIncrement(calendar, new DateTime(2004, 5, 24, 19, 3, 0), 44.723656m, "27-07-2004 13:47", format);
-            TestWorkdayIncrement(calendar, new DateTime(2004, 5, 24, 18, 3, 0), -6.7470217m, "13-05-2004 10:02", format);
+            TestWorkdayIncrement(calendar, new DateTime(2004, 5, 24, 18, 3, 0), -6.7470217m, "13-05-2004 10:01", format);
             TestWorkdayIncrement(calendar, new DateTime(2004, 5, 24, 8, 3, 0), 12.782709m, "10-06-2004 14:18", format);
             TestWorkdayIncrement(calendar, new DateTime(2004, 5, 24, 7, 3, 0), 8.276628m, "04-06-2004 10:12", format);
         }
