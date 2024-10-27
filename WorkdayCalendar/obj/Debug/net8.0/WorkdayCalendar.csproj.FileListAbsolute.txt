@@ -1,0 +1,15 @@
+/Users/adr0x/Projects/Challenges/WorkdayCalendar/obj/Debug/net8.0/WorkdayCalendar.GeneratedMSBuildEditorConfig.editorconfig
+/Users/adr0x/Projects/Challenges/WorkdayCalendar/obj/Debug/net8.0/WorkdayCalendar.AssemblyInfoInputs.cache
+/Users/adr0x/Projects/Challenges/WorkdayCalendar/obj/Debug/net8.0/WorkdayCalendar.AssemblyInfo.cs
+/Users/adr0x/Projects/Challenges/WorkdayCalendar/obj/Debug/net8.0/WorkdayCalendar.csproj.CoreCompileInputs.cache
+/Users/adr0x/Projects/Challenges/WorkdayCalendar/obj/Debug/net8.0/WorkdayCalendar.sourcelink.json
+/Users/adr0x/Projects/Challenges/WorkdayCalendar/bin/Debug/net8.0/WorkdayCalendar
+/Users/adr0x/Projects/Challenges/WorkdayCalendar/bin/Debug/net8.0/WorkdayCalendar.deps.json
+/Users/adr0x/Projects/Challenges/WorkdayCalendar/bin/Debug/net8.0/WorkdayCalendar.runtimeconfig.json
+/Users/adr0x/Projects/Challenges/WorkdayCalendar/bin/Debug/net8.0/WorkdayCalendar.dll
+/Users/adr0x/Projects/Challenges/WorkdayCalendar/bin/Debug/net8.0/WorkdayCalendar.pdb
+/Users/adr0x/Projects/Challenges/WorkdayCalendar/obj/Debug/net8.0/WorkdayCalendar.dll
+/Users/adr0x/Projects/Challenges/WorkdayCalendar/obj/Debug/net8.0/refint/WorkdayCalendar.dll
+/Users/adr0x/Projects/Challenges/WorkdayCalendar/obj/Debug/net8.0/WorkdayCalendar.pdb
+/Users/adr0x/Projects/Challenges/WorkdayCalendar/obj/Debug/net8.0/WorkdayCalendar.genruntimeconfig.cache
+/Users/adr0x/Projects/Challenges/WorkdayCalendar/obj/Debug/net8.0/ref/WorkdayCalendar.dll
