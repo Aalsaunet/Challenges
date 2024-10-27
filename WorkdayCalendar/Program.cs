@@ -44,7 +44,8 @@ namespace WorkdayNet
             if (holidays.Contains(date.Date))
                 return false;
 
-            foreach (var (month, day) in recurringHolidays) {
+            foreach (var (month, day) in recurringHolidays)
+            {
                 if (date.Month == month && date.Day == day)
                     return false;
             }
@@ -53,7 +54,8 @@ namespace WorkdayNet
 
         private DateTime GetNextOrPreviousWorkday(DateTime date, int increment)
         {
-            while (!IsWorkday(date)) {
+            while (!IsWorkday(date))
+            {
                 date = date.AddDays(increment);
             }
             return date;
@@ -61,15 +63,22 @@ namespace WorkdayNet
 
         private DateTime AdjustToWorkday(DateTime date, bool aheadInTime, int dayIncrement)
         {
-            if (aheadInTime && date.TimeOfDay < workdayStart) {
+            if (aheadInTime && date.TimeOfDay < workdayStart)
+            {
                 date = new DateTime(date.Year, date.Month, date.Day, workdayStart.Hours, workdayStart.Minutes, 0);
-            } else if (!aheadInTime && date.TimeOfDay < workdayStart) {
+            }
+            else if (!aheadInTime && date.TimeOfDay < workdayStart)
+            {
                 date = GetNextOrPreviousWorkday(date, dayIncrement);
                 date = new DateTime(date.Year, date.Month, date.Day, workdayEnd.Hours, workdayEnd.Minutes, 0);
-            } else if (aheadInTime && date.TimeOfDay > workdayEnd) {
+            }
+            else if (aheadInTime && date.TimeOfDay > workdayEnd)
+            {
                 date = GetNextOrPreviousWorkday(date, dayIncrement);
                 date = new DateTime(date.Year, date.Month, date.Day, workdayStart.Hours, workdayStart.Minutes, 0);
-            } else if (!aheadInTime && date.TimeOfDay > workdayEnd) {
+            }
+            else if (!aheadInTime && date.TimeOfDay > workdayEnd)
+            {
                 date = new DateTime(date.Year, date.Month, date.Day, workdayEnd.Hours, workdayEnd.Minutes, 0);
             }
             return date;
@@ -81,15 +90,11 @@ namespace WorkdayNet
             double fractionalSeconds = workdayDuration.TotalSeconds * (double)fractionalDay;
             DateTime targetDate = date.AddSeconds(fractionalSeconds);
 
-            if (targetDate.TimeOfDay < workdayStart)
-            {
-                targetDate = new DateTime(targetDate.Year, targetDate.Month, targetDate.Day, workdayEnd.Hours, workdayEnd.Minutes, 0);
-            }
-            else if (targetDate.TimeOfDay > workdayEnd)
+            if (targetDate.TimeOfDay < workdayStart || targetDate.TimeOfDay > workdayEnd)
             {
                 DateTime nextWorkday = GetNextOrPreviousWorkday(targetDate.AddDays(dayIncrement), dayIncrement);
                 TimeSpan overflow = targetDate.TimeOfDay - workdayEnd;
-                targetDate = new DateTime(nextWorkday.Year, nextWorkday.Month, nextWorkday.Day, workdayStart.Hours, workdayStart.Minutes, 0).Add(overflow);
+                targetDate = new DateTime(nextWorkday.Year, nextWorkday.Month, nextWorkday.Day, workdayEnd.Hours, workdayEnd.Minutes, 0).Add(overflow);
             }
 
             return targetDate;
@@ -99,7 +104,7 @@ namespace WorkdayNet
         {
             bool aheadInTime = incrementInWorkdays >= 0 ? true : false;
             int dayIncrement = aheadInTime ? 1 : -1;
-            
+
             if (!IsWorkday(startDate))
                 startDate = GetNextOrPreviousWorkday(startDate, dayIncrement);
 
@@ -120,7 +125,7 @@ namespace WorkdayNet
                 endDate = AddFractionalWorkday(endDate, fractionalDay, aheadInTime, dayIncrement);
 
             return endDate;
-        } 
+        }
     }
 
     public class Program
