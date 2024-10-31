@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace WorkdayNet
+﻿namespace WorkdayNet
 {
     public interface IWorkdayCalendar
     {
@@ -65,21 +62,21 @@ namespace WorkdayNet
         {
             if (aheadInTime && date.TimeOfDay < workdayStart)
             {
-                date = new DateTime(date.Year, date.Month, date.Day, workdayStart.Hours, workdayStart.Minutes, 0);
+                return new DateTime(date.Year, date.Month, date.Day, workdayStart.Hours, workdayStart.Minutes, 0);
             }
             else if (!aheadInTime && date.TimeOfDay < workdayStart)
             {
                 date = GetNextOrPreviousWorkday(date, dayIncrement);
-                date = new DateTime(date.Year, date.Month, date.Day, workdayEnd.Hours, workdayEnd.Minutes, 0);
+                return new DateTime(date.Year, date.Month, date.Day, workdayEnd.Hours, workdayEnd.Minutes, 0);
             }
             else if (aheadInTime && date.TimeOfDay > workdayEnd)
             {
                 date = GetNextOrPreviousWorkday(date, dayIncrement);
-                date = new DateTime(date.Year, date.Month, date.Day, workdayStart.Hours, workdayStart.Minutes, 0);
+                return new DateTime(date.Year, date.Month, date.Day, workdayStart.Hours, workdayStart.Minutes, 0);
             }
             else if (!aheadInTime && date.TimeOfDay > workdayEnd)
             {
-                date = new DateTime(date.Year, date.Month, date.Day, workdayEnd.Hours, workdayEnd.Minutes, 0);
+                return new DateTime(date.Year, date.Month, date.Day, workdayEnd.Hours, workdayEnd.Minutes, 0);
             }
             return date;
         }
@@ -108,19 +105,14 @@ namespace WorkdayNet
 
             int wholeDays = (int)incrementInWorkdays;
             decimal fractionalDay = incrementInWorkdays - wholeDays;
-            DateTime endDate = startDate;
 
-            int remainingDays = Math.Abs(wholeDays);
-            while (remainingDays > 0)
-            {
-                endDate = GetNextOrPreviousWorkday(endDate.AddDays(dayIncrement), dayIncrement);
-                remainingDays--;
-            }
+            for (int i = 0; i < Math.Abs(wholeDays); i++)
+                startDate = GetNextOrPreviousWorkday(startDate.AddDays(dayIncrement), dayIncrement);
 
             if (fractionalDay != 0)
-                endDate = AddFractionalWorkday(endDate, fractionalDay, aheadInTime, dayIncrement);
+                startDate = AddFractionalWorkday(startDate, fractionalDay, aheadInTime, dayIncrement);
 
-            return endDate;
+            return startDate;
         }
     }
 
