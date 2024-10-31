@@ -87,16 +87,16 @@ namespace WorkdayNet
         private DateTime AddFractionalWorkday(DateTime date, decimal fractionalDay, bool aheadInTime, int dayIncrement)
         {
             TimeSpan workdayDuration = workdayEnd - workdayStart;
-            double fractionalSeconds = workdayDuration.TotalSeconds * (double)fractionalDay;
-            DateTime targetDate = date.AddSeconds(fractionalSeconds);
+            double fractionalSeconds = workdayDuration.TotalSeconds * (double)Math.Abs(fractionalDay);
+            TimeSpan remainingOfDay = aheadInTime ? workdayEnd - date.TimeOfDay : date.TimeOfDay - workdayStart;
+            double overflow = fractionalSeconds - remainingOfDay.TotalSeconds;
+            DateTime targetDate = date.AddSeconds(dayIncrement * fractionalSeconds);
 
-            if (targetDate.TimeOfDay < workdayStart || targetDate.TimeOfDay > workdayEnd)
-            {
-                DateTime nextWorkday = GetNextOrPreviousWorkday(targetDate.AddDays(dayIncrement), dayIncrement);
-                TimeSpan overflow = targetDate.TimeOfDay - workdayEnd;
-                targetDate = new DateTime(nextWorkday.Year, nextWorkday.Month, nextWorkday.Day, workdayEnd.Hours, workdayEnd.Minutes, 0).Add(overflow);
+            if (overflow > 0) {
+                targetDate = AdjustToWorkday(targetDate, aheadInTime, dayIncrement);
+                targetDate = targetDate.AddSeconds(dayIncrement * overflow);
             }
-
+            
             return targetDate;
         }
 
@@ -104,10 +104,6 @@ namespace WorkdayNet
         {
             bool aheadInTime = incrementInWorkdays >= 0 ? true : false;
             int dayIncrement = aheadInTime ? 1 : -1;
-
-            if (!IsWorkday(startDate))
-                startDate = GetNextOrPreviousWorkday(startDate, dayIncrement);
-
             startDate = AdjustToWorkday(startDate, aheadInTime, dayIncrement);
 
             int wholeDays = (int)incrementInWorkdays;
